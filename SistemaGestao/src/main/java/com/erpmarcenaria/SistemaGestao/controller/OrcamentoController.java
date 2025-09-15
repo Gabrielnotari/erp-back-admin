@@ -25,7 +25,7 @@ public class OrcamentoController {
         return ResponseEntity.ok(orcamentoService.sell(solicitacaoOrcamento));
     }
     @PostMapping("/retorno")
-    public ResponseEntity<Response> returnToSupplier(@RequestBody @Valid SolicitacaoOrcamento solicitacaoOrcamento) {
+    public ResponseEntity<Response> returnToFornecedor(@RequestBody @Valid SolicitacaoOrcamento solicitacaoOrcamento) {
         return ResponseEntity.ok(orcamentoService.returnToFornecedor(solicitacaoOrcamento));
     }
 

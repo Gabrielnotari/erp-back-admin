@@ -32,7 +32,6 @@ public class ProdutoServiceImpl implements ProdutoService {
 
     private static final String IMAGE_DIRECTORY = System.getProperty("user.dir") + "/produto-image/";
 
-    //AFTER YOUR FROTEND IS SET UP WROTE THIS SO THE IMAGE IS SAVED IN YOUR FRONTEND PUBLIC FOLDER
     private static final String IMAGE_DIRECTOR_FRONTEND = "C:\\Users\\gabri\\Downloads";
 
     @Override
@@ -41,7 +40,7 @@ public class ProdutoServiceImpl implements ProdutoService {
         Categoria categoria = categoriaRepository.findById(produtoDTO.getCategoriaId())
                 .orElseThrow(()-> new NotFoundException("Categoria não encontrada"));
 
-        //map out produto dto to produto entity
+
         Produto produtoToSave = Produto.builder()
                 .nome(produtoDTO.getNome())
                 .sku(produtoDTO.getSku())
@@ -70,12 +69,12 @@ public class ProdutoServiceImpl implements ProdutoService {
         Produto existingProduto = produtoRepository.findById(produtoDTO.getProdutoId())
                 .orElseThrow(()-> new NotFoundException("Produto não encontrado"));
 
-        //check if image is associated with the update request
+
         if (imageFile != null && !imageFile.isEmpty()){
             String imagePath = saveImageToFrontendPublicFolder(imageFile);
             existingProduto.setImageUrl(imagePath);
         }
-        //Check if category is to be changed for the product
+
         if (produtoDTO.getCategoriaId() != null && produtoDTO.getCategoriaId() > 0){
 
             Categoria categoria = categoriaRepository.findById(produtoDTO.getCategoriaId())
@@ -105,7 +104,7 @@ public class ProdutoServiceImpl implements ProdutoService {
             existingProduto.setQuantidadeEstoque(produtoDTO.getQuantidadeEstoque());
         }
 
-        //Update the product
+        //atualizar o produto
         produtoRepository.save(existingProduto);
         return Response.builder()
                 .status(200)
@@ -157,25 +156,25 @@ public class ProdutoServiceImpl implements ProdutoService {
     }
 
     private String saveImageToFrontendPublicFolder(MultipartFile imageFile){
-        //validate image check
+
         if (!imageFile.getContentType().startsWith("image/")){
             throw new IllegalArgumentException("Only image files are allowed");
         }
-        //create the directory to store images if it doesn't exist
+
         File directory = new File(IMAGE_DIRECTOR_FRONTEND);
 
         if (!directory.exists()){
             directory.mkdir();
             log.info("Directory was created");
         }
-        //generate unique file name for the image
+
         String uniqueFileName = UUID.randomUUID() + "_" + imageFile.getOriginalFilename();
-        //get the absolute path of the image
+
         String imagePath = IMAGE_DIRECTOR_FRONTEND + uniqueFileName;
 
         try {
             File desctinationFile = new File(imagePath);
-            imageFile.transferTo(desctinationFile); //we are transfering(writing to this folder)
+            imageFile.transferTo(desctinationFile);
 
         }catch (Exception e){
             throw new IllegalArgumentException("Erro ocorrido enquanto salva imagem" + e.getMessage());

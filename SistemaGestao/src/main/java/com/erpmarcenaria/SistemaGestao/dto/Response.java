@@ -13,19 +13,19 @@ import java.util.List;
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Response {
-    //generic
+    //generico
     private int status;
     private String message;
-    //for login
+    //para login
     private String token;
     private UserRole role;
     private String expirationTime;
 
-    //for pagination
+    //para paginação
     private Integer totalPages;
     private Long totalElements;
 
-    //data output optional
+    //opcional
     private UserDTO user;
     private List<UserDTO> users;
 

@@ -95,11 +95,10 @@ public class OrcamentoServiceImpl implements OrcamentoService {
 
         User user = userService.getCurrentLoggedInUser();
 
-        //update the stock quantity and re-save
+
         produto.setQuantidadeEstoque(produto.getQuantidadeEstoque() - quantidade);
         produtoRepository.save(produto);
 
-        //create a transaction
         Orcamento orcamento = Orcamento.builder()
                 .tipoOrcamento(TipoOrcamento.VENDA)
                 .status(StatusOrcamento.COMPLETO)
@@ -135,11 +134,11 @@ public class OrcamentoServiceImpl implements OrcamentoService {
 
         User user = userService.getCurrentLoggedInUser();
 
-        //update the stock quantity and re-save
+        //atualizar a quantidade de estoque
         produto.setQuantidadeEstoque(produto.getQuantidadeEstoque() - quantidade);
         produtoRepository.save(produto);
 
-        //create a transaction
+        //criar um orçamento
         Orcamento orcamento = Orcamento.builder()
                 .tipoOrcamento(TipoOrcamento.RETORNAR_PARA_FORNECEDOR)
                 .status(StatusOrcamento.PROCESSANDO)
