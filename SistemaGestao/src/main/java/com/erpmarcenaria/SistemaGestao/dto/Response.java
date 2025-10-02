@@ -41,5 +41,11 @@ public class Response {
     private OrcamentoDTO orcamento;
     private List<OrcamentoDTO> orcamentos;
 
+    private List<ProjetoDTO> projetos;
+    private ProjetoDTO projeto;
+
+    private ClienteDTO cliente;           // para getClienteById
+    private List<ClienteDTO> clientes;
+
     private final LocalDateTime timestamp = LocalDateTime.now();
 }

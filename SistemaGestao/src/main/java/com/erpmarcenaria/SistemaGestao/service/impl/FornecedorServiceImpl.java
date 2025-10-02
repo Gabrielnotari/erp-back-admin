@@ -55,9 +55,9 @@ public class FornecedorServiceImpl implements FornecedorService {
     @Override
     public Response getAllFornecedores() {
 
-        List<Fornecedor> categories = fornecedorRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
+        List<Fornecedor> fornecedores = fornecedorRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
 
-        List<FornecedorDTO> fornecedorDTOS = modelMapper.map(categories, new TypeToken<List<FornecedorDTO>>() {}.getType());
+        List<FornecedorDTO> fornecedorDTOS = modelMapper.map(fornecedores, new TypeToken<List<FornecedorDTO>>() {}.getType());
 
         return Response.builder()
                 .status(200)
