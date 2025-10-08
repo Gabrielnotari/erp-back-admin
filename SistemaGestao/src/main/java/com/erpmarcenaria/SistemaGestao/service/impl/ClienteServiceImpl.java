@@ -57,7 +57,14 @@ public class ClienteServiceImpl implements ClienteService {
     @Override
     public Response getAllClientes() {
         List<Cliente> clientes = clienteRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
-        List<ClienteDTO> clienteDTOS = modelMapper.map(clientes, new TypeToken<List<ClienteDTO>>() {}.getType());
+
+        List<ClienteDTO> clienteDTOS = clientes.stream().map(cliente -> {
+            ClienteDTO dto = modelMapper.map(cliente, ClienteDTO.class);
+            dto.setQtdProjetos(
+                    cliente.getProjetos() != null ? cliente.getProjetos().size() : 0
+            );
+            return dto;
+        }).toList();
 
         return Response.builder()
                 .status(200)
@@ -65,6 +72,7 @@ public class ClienteServiceImpl implements ClienteService {
                 .clientes(clienteDTOS)
                 .build();
     }
+
 
     @Override
     public Response getClienteById(Long id) {

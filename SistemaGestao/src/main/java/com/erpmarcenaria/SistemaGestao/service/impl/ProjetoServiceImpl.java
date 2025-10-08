@@ -25,9 +25,16 @@ public class ProjetoServiceImpl implements ProjetoService {
     private final ModelMapper modelMapper;
     private final ClienteRepository clienteRepository;
 
-    // 🔹 Converte Projeto → ProjetoDTO incluindo nome do cliente
     private ProjetoDTO convertToDTO(Projeto projeto) {
-        ProjetoDTO dto = modelMapper.map(projeto, ProjetoDTO.class);
+        ProjetoDTO dto = new ProjetoDTO();
+
+        dto.setId(projeto.getId());
+        dto.setNomeProjeto(projeto.getNomeProjeto());
+        dto.setDescricao(projeto.getDescricao());
+        dto.setStatus(projeto.getStatus());
+        dto.setPrevisaoEntrega(projeto.getPrevisaoEntrega());
+        dto.setDataInicio(projeto.getDataInicio());
+        dto.setValor(projeto.getValor());
 
         if (projeto.getCliente() != null) {
             dto.setClienteId(projeto.getCliente().getId());
@@ -36,6 +43,7 @@ public class ProjetoServiceImpl implements ProjetoService {
 
         return dto;
     }
+
 
     @Override
     public Response addProjeto(ProjetoDTO projetoDTO) {

@@ -38,6 +38,9 @@ public class Response {
     private ProdutoDTO produto;
     private List<ProdutoDTO> produtos;
 
+    // Campos opcionais para diferentes retornos
+    private Object data;
+
     private OrcamentoDTO orcamento;
     private List<OrcamentoDTO> orcamentos;
 
