@@ -1,22 +1,22 @@
 package com.erpmarcenaria.SistemaGestao.entity;
 
+import com.erpmarcenaria.SistemaGestao.auditoria.Auditable;
 import com.erpmarcenaria.SistemaGestao.enums.StatusProjeto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
 @Data
+@EqualsAndHashCode(callSuper = false)
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Table(name="projetos")
-public class Projeto {
+public class Projeto extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

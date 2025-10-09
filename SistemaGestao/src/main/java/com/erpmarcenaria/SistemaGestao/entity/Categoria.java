@@ -1,21 +1,20 @@
 package com.erpmarcenaria.SistemaGestao.entity;
 
+import com.erpmarcenaria.SistemaGestao.auditoria.Auditable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
 @Data
+@EqualsAndHashCode(callSuper = false)
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Table(name = "categorias")
-public class Categoria {
+public class Categoria extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

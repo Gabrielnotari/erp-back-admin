@@ -1,23 +1,22 @@
 package com.erpmarcenaria.SistemaGestao.entity;
 
+import com.erpmarcenaria.SistemaGestao.auditoria.Auditable;
 import com.erpmarcenaria.SistemaGestao.enums.StatusOrcamento;
 import com.erpmarcenaria.SistemaGestao.enums.TipoOrcamento;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
 @Data
+@EqualsAndHashCode(callSuper = false)
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Table(name = "orcamentos")
-public class Orcamento {
+public class Orcamento extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
